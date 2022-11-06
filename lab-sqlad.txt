@@ -1,0 +1,27 @@
+#Challenge 1
+SELECT a.au_id AS 'AUTHOR ID ' ,
+t.ytd_sales*0.01*t.royalty AS 'royalty' , SUM(t.ytd_sales*0.01*t.royalty + advance ) AS 'profit'
+FROM authors a 
+JOIN titleauthor te
+ON a.au_id = te.au_id
+JOIN titles t 
+ON te.title_id = t.title_id
+GROUP BY a.au_id
+ORDER BY royalty DESC
+limit 3 ;
+
+#Challenge 2/3
+CREATE TABLE au
+SELECT a.au_id AS 'AUTHOR ID ' ,
+t.ytd_sales*0.01*t.royalty AS 'royalty' , SUM(t.ytd_sales*0.01*t.royalty + advance ) AS 'profit'
+FROM authors a 
+JOIN titleauthor te
+USING(au_id)
+JOIN titles t 
+USING(title_id)
+GROUP BY a.au_id
+ORDER BY royalty DESC
+limit 3 ;
+
+SELECT * from au;
+
